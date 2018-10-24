@@ -14,22 +14,22 @@
     <th>SN</th>
     <th>Student Name</th>
     <th>Email</th>
-    <th>Class Name</th>
-    <th>Date</th>
+    <th>Comments</th>
+    
 
     
     <th></th>
 </tr>
-@foreach($bookings as $key => $data)
+@foreach($feedbacks as $key => $data)
 <tr>
         <td>{{$key+1}}</td>
 <td>{{$data->student->name}}</td>
 <td>{{$data->student->email}}</td>
-<td>{{$data->class->class_name}}</td>
-<td>{{$data->class->date}}</td>
+<td>{{$data->comment}}</td>
 
 
 
+<td><a href = "{{route('feedback.edit', $data->id)}}"><button class = "btn btn-danger">Delete</button></a></td>
 
 </tr>
 @endforeach

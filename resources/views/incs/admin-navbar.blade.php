@@ -20,7 +20,13 @@
     <li class = "nav-item">
             <a class = "nav-link" href ="{{route('classes.index')}}">Classes</a>
     </li>
-                </ul>
+    <li class = "nav-item">
+            <a class = "nav-link" href ="{{route('view.bookings')}}">Bookings</a>
+    </li>
+    <li class = "nav-item">
+            <a class = "nav-link" href ="{{route('feedback.index')}}">Feedbacks</a>
+    </li> 
+</ul>
     
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">

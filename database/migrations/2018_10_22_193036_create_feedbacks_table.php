@@ -17,7 +17,7 @@ class CreateFeedBacksTable extends Migration
             $table->increments('id');
             $table->integer('student_id')->unsigned();
             $table->integer('class_id')->unsigned();
-            $table->string('comment')->nullable();
+            $table->string('comment', 2000)->nullable();
 
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');

@@ -27,6 +27,8 @@ Route::get('/teachers','Users\UsersController@viewTeachers')->name('users.teache
 Route::get('/teahdelete/{id}','Users\UsersController@deleteTeacher')->name('teacher.delete');
 Route::get('/classdelete/{id}','Classes\ClassesController@deleteClass')->name('class.delete');
 Route::resource('/classes','Classes\ClassesController');
+Route::post('/teacherupdate/{id}', 'Users\UsersController@updateTeacher')->name('teachers.update');
+Route::get('/booked','Classes\ClassesController@viewBookings')->name('view.bookings');
 });
 
 Route::get('/userlogout', 'Auth\LoginController@logoutUser')->name('userlogout');
@@ -34,3 +36,5 @@ Route::get('/classes', 'Controller@classes')->name('classes');
 Route::get('/view-classes/{id}', 'Controller@viewClasses')->name('view.classes');
 Route::resource('/bookings','Bookings\BookingsController');
 Route::post('/rate/{id}','Classes\ClassesController@ratings')->name('rate.class');
+Route::resource('/feedback', 'FeedBacks\FeedBacksController');
+Route::get('/update','Controller@updateForm')->name('user-update')->middleware('auth');

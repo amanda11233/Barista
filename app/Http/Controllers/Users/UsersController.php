@@ -13,7 +13,7 @@ use App\Teacher;
 class UsersController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth:admin');
+        $this->middleware('auth:admin')->except('update');
     }
     /**
      * Display a listing of the resource.
@@ -95,7 +95,7 @@ public function viewTeachers(){
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -106,7 +106,8 @@ public function viewTeachers(){
      */
     public function edit($id)
     {
-        //
+        $teacher = Teacher::find($id);
+        return view('admins.teachers.editteachers', compact('teacher'));
     }
 
     /**
@@ -118,7 +119,18 @@ public function viewTeachers(){
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'address' => $request->address,
+            'phone' => $request->phone,
+            'gender' => $request->gender,
+          
+            
+        );
+
+        Student::where('id', $id)->update($data);
+        return redirect()->back()->with('success','Account Updated!!');
     }
 
     /**
@@ -138,5 +150,36 @@ public function viewTeachers(){
         Teacher::where('id', $id)->delete();
         return redirect()->back()->with('success','Teacher Deleted');
 
+    }
+    public function updateTeacher(Request $request, $id){
+     
+      
+          if(Input::hasFile('img')){
+              $teacherImage = $request->img;
+          $extensionteacherImage = $teacherImage->getClientOriginalExtension();
+          $nameteacherImage = $teacherImage->getClientOriginalName();
+          $filenameteacherImage = $nameteacherImage;
+          $pathteacherImage = public_path().'/images/teachers/'.$request->email.'/';
+          $teacherImage->move($pathteacherImage,$filenameteacherImage);
+          $data = array(
+              'name' => $request->name,
+              'email' => $request->email,
+              'password' => Hash::make($request->password),
+              'address' => $request->address,
+              'phone' => $request->phone,
+              'gender' => $request->gender,
+              'picture' => $filenameteacherImage,
+              
+          );
+             
+          
+          
+              Teacher::where('id', $id)->update($data);
+          
+                  
+          
+                  return redirect()->route('users.teachers')->with('success','Teacher Info  Updated');
+          
+        }
     }
 }

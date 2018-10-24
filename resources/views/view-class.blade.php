@@ -45,23 +45,60 @@
 
 @endif
 @if(Auth::guard('web')->user())
-<form class = "mt-5" action = {{route('rate.class',$class->id)}} method = "post">
-    @csrf
-    <div class = "form-group ">
- 
-    
-    <button  id = "min" onclick = "sub();" type = "button">-</button>
-    <input type = "number" value = "1" class = "text-center rate" id = "rate" name = "rates">
-    <button class = "plus" type = "button"  onclick = "addition();">+</button>
+<div class = "row">
+    <div class = "col-md-6">
+            <form class = "mt-5" action = {{route('rate.class',$class->id)}} method = "post">
+                    @csrf
+                    <h1>Rate This Class</h1>
+                    <hr>
+                    <div class = "form-group ">
+                 
+                    
+                    <button  id = "min" onclick = "sub();" type = "button">-</button>
+                    <input type = "number" value = "1" class = "text-center rate" id = "rate" name = "rates">
+                    <button class = "plus" type = "button"  onclick = "addition();">+</button>
+                    </div>
+                    <div class = "form-group ">
+                            
+                            <button class = "btn btn-primary" type = "submit">Rate</button>
+                            </div>
+                </form>
+                
     </div>
-    <div class = "form-group ">
-            
-            <button class = "btn btn-primary" type = "submit">Rate</button>
-            </div>
-</form>
+    <div class = "col-md-6">
+            <form class = "mt-5" action = {{route('feedback.update',$class->id)}} method = "post">
+                    @csrf
+                    {!! method_field('patch') !!}
+                    <div class = "form-group ">
+                 
+                    <h1 class = "tex-center">Feedback</h1>
+                    <hr>
+                    <textarea name = "feed"  class= "form-control feedback"></textarea>
+                    <button class = "btn btn-primary mt-5" type = "submit">Send Feedback</button>
+                    </div>
+                </form>
+    </div>
+</div>
+
 @endif
 </div>
-   
+   <div class = "container mt-5">
+       <h1 class = "text-center">Comments</h1><hr>
+       @foreach($feedbacks as $value)
+       <div class = "row mt-4">
+           <div class = "col-md-6">
+               <div class = "comments">
+               <div class = "com-username">
+<h4>{{$value->student->name}}:</h4>
+               </div>
+               <div class = "com-comment">
+                   {{$value->comment}}
+               </div>
+               </div>
+           </div>
+       </div>
+       @endforeach
+   </div>
 </div>
 <script>
   var num = 1;

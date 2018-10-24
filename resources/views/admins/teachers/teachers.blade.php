@@ -30,7 +30,7 @@
 <td>{{$data->phone}}</td>
 <td>{{$data->gender}}</td>
 <td><img src  = "{{asset('images/teachers/' . $data->email . '/' . $data->picture)}}" width = "100" height = "100"></td>
-
+<td> <a href = "{{route('users.edit', $data->id)}}"><button class  = "btn btn-primary">Edit</button></a>
 <td> <a href = "{{route('teacher.delete', $data->id)}}"><button class  = "btn btn-danger">Delete</button></a>
 </tr>
 @endforeach

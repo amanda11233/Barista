@@ -8,8 +8,10 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Teacher;
 use App\Booking;
+use App\FeedBack;
 use Auth;
 use App\Classes;
+use App\Student;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
@@ -30,15 +32,24 @@ public function viewClasses($id){
     if(Auth::guard('web')->user()){
         $bookingCheck = Booking::where([['student_id', Auth::id()],['class_id', $id]])->count();
         $class = Classes::find($id);
+        $feedbacks = FeedBack::where('class_id', $id)->get();
         $ratings = $class->rating->avg('rate');
-        return view('view-class', compact('class','bookingCheck','ratings'));
+        return view('view-class', compact('class','bookingCheck','ratings','feedbacks'));
     }else{
         
         $class = Classes::find($id);
         $ratings = $class->rating->avg('rate');
-        return view('view-class', compact('class','ratings'));
+        $feedbacks = FeedBack::where('class_id', $id)->get();
+        return view('view-class', compact('class','ratings','feedbacks'));
     }
   
 }
+
+public function updateForm(){
+    $student = Student::find(Auth::id());
+    return view('update-users', compact('student'));
+}
+
+
 
 }

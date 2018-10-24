@@ -19,7 +19,7 @@ class CreateClassesTable extends Migration
             $table->string('date');
             $table->integer('teacher_id')->unsigned();
             $table->double('price');
-            $table->string('desc');
+            $table->string('desc', 2000);
 
             $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
 

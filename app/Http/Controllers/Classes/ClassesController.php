@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Classes;
 use Auth;
 use App\Teacher;
+use App\Booking;
 use App\Rating;
 class ClassesController extends Controller
 {
@@ -72,6 +73,10 @@ return redirect()->route('classes.index')->with('success','Class Added');
         //
     }
 
+    public function viewBookings(){
+$bookings = Booking::all();
+return view('admins.bookings.bookings',compact('bookings'));
+    }
     /**
      * Show the form for editing the specified resource.
      *

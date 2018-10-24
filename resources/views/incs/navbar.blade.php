@@ -37,7 +37,9 @@
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-
+                            <a class="dropdown-item" href="{{ route('user-update') }}">
+                             {{ __('Update Account') }}
+                         </a>
                             <form id="logout-form" action="{{ route('userlogout') }}" method="GET" style="display: none;">
                                 @csrf
                             </form>
