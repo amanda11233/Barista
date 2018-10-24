@@ -32,3 +32,5 @@ Route::resource('/classes','Classes\ClassesController');
 Route::get('/userlogout', 'Auth\LoginController@logoutUser')->name('userlogout');
 Route::get('/classes', 'Controller@classes')->name('classes');
 Route::get('/view-classes/{id}', 'Controller@viewClasses')->name('view.classes');
+Route::resource('/bookings','Bookings\BookingsController');
+Route::post('/rate/{id}','Classes\ClassesController@ratings')->name('rate.class');

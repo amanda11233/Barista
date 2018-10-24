@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Classes;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Classes;
+use Auth;
 use App\Teacher;
+use App\Rating;
 class ClassesController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth:admin')->except('bookClass');
+        $this->middleware('auth:admin')->except('ratings');
     }
     /**
      * Display a listing of the resource.
@@ -125,7 +127,15 @@ return redirect()->route('classes.index')->with('success','Class Added');
         return redirect()->back()->with('success','Classes Deleted!!');
     }
 
-    public function bookClass($id){
-
+    public function ratings(Request $request, $id){
+ $user_id = Auth::id();
+ $data = array(
+     'student_id' => $user_id,
+     'class_id' => $id,
+     'rate' => $request->rates,
+ );
+ 
+ Rating::create($data);
+ return redirect()->back()->with('success','You have rated this clas');
     }
 }

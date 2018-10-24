@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Bookings;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Auth;
+use App\Student;
 class BookingsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +50,12 @@ class BookingsController extends Controller
      */
     public function show($id)
     {
-        //
+        $user_id = Auth::id();
+        $user = Student::find($user_id);
+        $user->book_class()->attach($id);
+         
+   
+           return redirect()->back()->with('success' ,"You Have Booked This Class!!");
     }
 
     /**

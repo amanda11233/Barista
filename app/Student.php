@@ -29,7 +29,7 @@ class Student extends Authenticatable
         'password', 'remember_token',
     ];
     public function book_class(){
-        return $this->belongsToMany(Student::class, 'classes', 'student_id', 'class_id');
+        return $this->belongsToMany(Student::class, 'bookings', 'student_id', 'class_id');
     }
 
 }

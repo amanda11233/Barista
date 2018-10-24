@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Teacher;
+use App\Booking;
+use Auth;
 use App\Classes;
 class Controller extends BaseController
 {
@@ -24,8 +26,19 @@ public function classes(){
 }
 
 public function viewClasses($id){
-    $class = Classes::find($id);
-    return view('view-class', compact('class'));
+  
+    if(Auth::guard('web')->user()){
+        $bookingCheck = Booking::where([['student_id', Auth::id()],['class_id', $id]])->count();
+        $class = Classes::find($id);
+        $ratings = $class->rating->avg('rate');
+        return view('view-class', compact('class','bookingCheck','ratings'));
+    }else{
+        
+        $class = Classes::find($id);
+        $ratings = $class->rating->avg('rate');
+        return view('view-class', compact('class','ratings'));
+    }
+  
 }
 
 }
