@@ -21,7 +21,7 @@ class CreateClassesTable extends Migration
             $table->double('price');
             $table->string('desc', 2000);
 
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('Cascade');
 
             $table->timestamps();
         });
