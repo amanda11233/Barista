@@ -15,8 +15,8 @@ class CreateFeedBacksTable extends Migration
     {
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id')->unsigned();
-            $table->integer('class_id')->unsigned();
+            $table->integer('student_id')->unsigned()->nullable();
+            $table->integer('class_id')->unsigned()->nullable();
             $table->string('comment', 2000)->nullable();
 
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');

@@ -15,8 +15,8 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('student_id')->unsigned();
-            $table->integer('class_id')->unsigned();
+            $table->integer('student_id')->unsigned()->nullable();
+            $table->integer('class_id')->unsigned()->nullable();
 
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('cascade');

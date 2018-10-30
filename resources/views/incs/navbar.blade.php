@@ -11,8 +11,11 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
 <li class = "nav-item"> <a href = "{{route('classes')}}" class = "nav-link">Classes</a></li>
+<li class = "nav-item"> <a href = "{{asset('mannual/User-Mannual.pdf')}}" class = "nav-link" download>Help</a></li>
             </ul>
 
+              
+                            
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->

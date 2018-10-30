@@ -11,9 +11,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Student;
 class  createUserTest extends TestCase
 {
-
     use DatabaseMigrations;
-    
     /**    
       @test
      
@@ -32,7 +30,4 @@ $students = Student::create([
 
 $this->addToAssertionCount(1);
 
-}
-
-
-    }
+}    }

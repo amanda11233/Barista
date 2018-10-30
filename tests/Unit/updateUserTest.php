@@ -11,7 +11,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Student;
 class  updateUserTest extends TestCase
 {
-
     use DatabaseMigrations;
     
     /**    
@@ -28,16 +27,8 @@ $data = array(
         'dob' => '2018-1-1',
         'gender' => 'Male',
         'password' => 'admin123'
-     
-       
 );
-
 Student::where('id' , 1)->update($data);
-
-
 $this->addToAssertionCount(1);
-
+}    
 }
-
-
-    }

@@ -17,13 +17,16 @@ class CreateClassesTable extends Migration
             $table->increments('id');
             $table->string('class_name');
             $table->string('date');
-            $table->integer('teacher_id')->unsigned();
+            $table->integer('teach_id')->unsigned()->nullable();
             $table->double('price');
             $table->string('desc', 2000);
 
-            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('Cascade');
+            $table->foreign('teach_id')->references('id')->on('teachers')->onDelete('cascade');
+    
 
             $table->timestamps();
+           
+           
         });
     }
 
